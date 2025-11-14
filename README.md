@@ -1,1 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/BY41byMO)
+StudySync
+
+A collaborative academic resource-sharing platform for students.
+This project allows students to share course materials, past questions, notes, tutorials, assignments, and study guides across semesters and departments.
