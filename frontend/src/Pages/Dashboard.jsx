@@ -1,13 +1,13 @@
 export default function Dashboard() {
   const members = [
     { name: "Okoye Kennedy", role: "Admin" },
-    { name: "Okon Christopher Ulo" },
+    { name: "Omoware Ogheneyoma Russell" },
     { name: "Olaitan Temitayo" },
     { name: "Olajide Joseph Olabisi" },
     { name: "Oloyede Kikelomo Azeezat" },
     { name: "Olusegun Samuel Feyisetan" },
     { name: "Omenka Chimaanda Petra-angelica" },
-    { name: "Omoware Ogheneyoma Russell" },
+    { name: "Okon Christopher Ulo" },
     { name: "Oni Eniola Joseph" },
     { name: "Onikate-amosu Olamikun Abdul-lateef" }
   ];
@@ -15,12 +15,23 @@ export default function Dashboard() {
   return (
     <>
       <style>{`
+        * {
+          box-sizing: border-box;
+        }
+
+        body, html {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+        }
+
         .dashboard {
           display: flex;
           height: 100vh;
           background-color: #0f172a;
           color: #fff;
           font-family: 'Poppins', sans-serif;
+          overflow: hidden; /* prevent page scroll */
         }
 
         .sidebar {
@@ -71,6 +82,8 @@ export default function Dashboard() {
         .main {
           flex: 1;
           padding: 2rem;
+          overflow-y: auto; /* scrollable */
+          height: 100%; /* fill remaining space */
         }
 
         .breadcrumb {
@@ -136,14 +149,13 @@ export default function Dashboard() {
           background-color: #1e293b;
         }
 
-        /* removed avatar styling since no images */
         .member-name {
           flex: 1;
         }
 
         .tag {
-          font-size: 0.75rem;
-          padding: 0.2rem 0.5rem;
+          font-size: 0.95rem;
+          padding: 0.4rem 0.7rem;
           border-radius: 9999px;
           font-weight: 500;
         }
@@ -152,6 +164,7 @@ export default function Dashboard() {
           background-color: #fbbf24;
           color: #1f2937;
         }
+
       `}</style>
 
       <div className="dashboard">

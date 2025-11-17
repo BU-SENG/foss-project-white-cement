@@ -18,7 +18,6 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submit logic here
     console.log(form);
   };
 
@@ -99,12 +98,13 @@ const styles = {
     alignItems: 'center',
     minHeight: '100vh',
     backgroundColor: '#f1f5f9',
+    padding: '2rem', // space from top and bottom
   },
   form: {
     backgroundColor: '#192734',
     padding: '2rem',
-    borderRadius: '0.5rem',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+    borderRadius: '1rem', // bigger curve
+    boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
     width: '100%',
     maxWidth: '400px',
     display: 'flex',
@@ -126,7 +126,7 @@ const styles = {
   },
   input: {
     padding: '0.5rem',
-    borderRadius: '0.375rem',
+    borderRadius: '0.5rem', // slightly bigger input curves
     border: '1px solid #d1d5db',
     width: '100%',
     fontSize: '1rem',
@@ -146,7 +146,7 @@ const styles = {
     color: '#fff',
     padding: '0.75rem',
     border: 'none',
-    borderRadius: '0.375rem',
+    borderRadius: '0.5rem', // match form curves
     cursor: 'pointer',
     fontWeight: '600',
     fontSize: '1rem',
