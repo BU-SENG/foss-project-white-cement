@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     fullName: '',
     email: '',
@@ -18,7 +20,9 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Here you can add API call or validation
     console.log(form);
+    navigate('/'); // Redirect to Home after signup
   };
 
   return (
@@ -82,10 +86,6 @@ function Signup() {
         </div>
 
         <button type="submit" style={styles.continueButton}>Continue</button>
-
-        <p style={styles.loginText}>
-          Already have an account? <Link to="/login" style={styles.loginLink}>Log in</Link>
-        </p>
       </form>
     </div>
   );
@@ -98,12 +98,12 @@ const styles = {
     alignItems: 'center',
     minHeight: '100vh',
     backgroundColor: '#f1f5f9',
-    padding: '2rem', // space from top and bottom
+    padding: '2rem',
   },
   form: {
     backgroundColor: '#192734',
     padding: '2rem',
-    borderRadius: '1rem', // bigger curve
+    borderRadius: '1rem',
     boxShadow: '0 4px 12px rgba(0,0,0,0.2)',
     width: '100%',
     maxWidth: '400px',
@@ -126,7 +126,7 @@ const styles = {
   },
   input: {
     padding: '0.5rem',
-    borderRadius: '0.5rem', // slightly bigger input curves
+    borderRadius: '0.5rem',
     border: '1px solid #d1d5db',
     width: '100%',
     fontSize: '1rem',
@@ -146,22 +146,11 @@ const styles = {
     color: '#fff',
     padding: '0.75rem',
     border: 'none',
-    borderRadius: '0.5rem', // match form curves
+    borderRadius: '0.5rem',
     cursor: 'pointer',
     fontWeight: '600',
     fontSize: '1rem',
     marginTop: '1rem',
-  },
-  loginText: {
-    color: '#94a3b8',
-    textAlign: 'center',
-    marginTop: '1rem',
-    fontSize: '0.9rem',
-  },
-  loginLink: {
-    color: '#3b82f6',
-    textDecoration: 'none',
-    fontWeight: '600',
   },
 };
 

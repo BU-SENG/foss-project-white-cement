@@ -5,7 +5,7 @@ import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import Dashboard from './Pages/Dashboard';
 import FindGroup from './pages/FindGroup';
-import Profile from './Pages/Profile';
+import AvailableGroups from './Pages/AvailableGroups';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/find-group" element={<FindGroup />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/available-groups" element={<AvailableGroups />} />
     </Routes>
   );
 }

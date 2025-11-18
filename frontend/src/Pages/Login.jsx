@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { BookOpen, Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // react-router-dom v6 navigation
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    // Here you would normally validate credentials
+    navigate('/'); // redirect to Home after login
   };
 
   return (
@@ -23,7 +29,7 @@ const Login = () => {
         <p className="text-gray-400 mb-8">Enter your credentials to access your account.</p>
 
         {/* Form */}
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleLogin}>
 
           {/* Email */}
           <div>
@@ -35,6 +41,7 @@ const Login = () => {
               id="email"
               placeholder="you@example.com"
               className="w-full p-3 border border-gray-700 rounded-lg bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
 
@@ -54,6 +61,7 @@ const Login = () => {
                 id="password"
                 placeholder="Enter your password"
                 className="w-full p-3 pr-10 border border-gray-700 rounded-lg bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
               <button
                 type="button"
@@ -78,7 +86,7 @@ const Login = () => {
         {/* Sign Up Link */}
         <div className="text-center mt-6 text-sm">
           <span className="text-gray-400">Don't have an account? </span>
-          <a href="#" className="text-blue-400 hover:text-blue-300 font-semibold">
+          <a href="/signup" className="text-blue-400 hover:text-blue-300 font-semibold">
             Sign Up
           </a>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, Bell, Search, ChevronDown, User } from 'lucide-react';
+import { Settings, Bell, Search, BookOpen } from 'lucide-react';
 
 // Mock Data
 const bestMatchData = {
@@ -8,8 +8,7 @@ const bestMatchData = {
   description: "A highly collaborative group focused on weekly problem sets and rigorous exam preparation. We meet twice a week online and value active participation.",
   members: {
     count: 4,
-    // Use simple icons or initials for avatars
-    list: ['J', 'S', 'A', 'M'] 
+    list: ['J', 'S', 'A', 'M']
   }
 };
 
@@ -46,19 +45,18 @@ const MemberAvatars = ({ members, isLarge = false }) => {
   );
 };
 
-
-// Main Header Component
+// Header Component
 const Header = () => (
   <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
     <div className="flex items-center space-x-2">
-      <Search className="text-blue-400 w-6 h-6" />
+      <BookOpen className="text-blue-400 w-6 h-6" />
       <span className="text-xl font-bold text-white">StudySync</span>
     </div>
     
     <nav className="hidden md:flex space-x-6 text-sm">
-      <a href="#" className="text-gray-400 hover:text-white transition duration-150">Dashboard</a>
-      <a href="#" className="text-gray-400 hover:text-white transition duration-150">My Groups</a>
-      <a href="#" className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1">Find Groups</a>
+      <a href="/dashboard" className="text-gray-400 hover:text-white transition duration-150">Dashboard</a>
+      <a href="/find-group" className="text-gray-400 hover:text-white transition duration-150">Find Group</a>
+      <a href="/available-groups" className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1">Available Groups</a>
     </nav>
     
     <div className="flex items-center space-x-4">
@@ -71,18 +69,18 @@ const Header = () => (
       <button aria-label="Notifications" className="text-gray-400 hover:text-white transition duration-150">
         <Bell className="w-5 h-5" />
       </button>
-      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-sm cursor-pointer">
-        A
-      </div>
+      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
+  K
+</div>
+
     </div>
   </header>
 );
 
-// Component for the Top Group Card
+// Best Match Card Component
 const BestMatchCard = ({ data }) => (
   <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center">
     
-    {/* Left Content Area */}
     <div className="flex-1 min-w-0 mb-4 lg:mb-0">
       <div className="flex items-center mb-2 space-x-3">
         <span className="bg-green-700 text-white text-xs font-semibold px-2 py-0.5 rounded-md">Best Match</span>
@@ -95,14 +93,13 @@ const BestMatchCard = ({ data }) => (
       <MemberAvatars members={data.members} isLarge={true} />
     </div>
 
-    {/* Right Button */}
     <button className="w-full lg:w-auto px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg hover:bg-blue-700 transition duration-200 shadow-md">
       Join Group
     </button>
   </div>
 );
 
-// Component for a Recommended Group Card
+// Recommended Group Card Component
 const RecommendedGroupCard = ({ data }) => (
   <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex flex-col h-full hover:shadow-2xl transition duration-200">
     <span className="text-blue-400 text-sm font-semibold mb-2">{data.match}% Match</span>
@@ -120,20 +117,18 @@ const RecommendedGroupCard = ({ data }) => (
   </div>
 );
 
-// Main Application Component
-const App = () => {
+// AvailableGroups Page Component
+const AvailableGroups = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
       <Header />
       
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         
-        {/* Main Title */}
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-white">
           Your Study Group Matches
         </h1>
 
-        {/* Best Match Section */}
         <section className="mb-12">
           <h2 className="text-xl font-semibold text-gray-300 mb-4">
             Your Best Group Match
@@ -141,15 +136,12 @@ const App = () => {
           <BestMatchCard data={bestMatchData} />
         </section>
 
-        {/* Other Recommended Groups Section */}
         <section>
-          
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
             <h2 className="text-xl font-semibold text-gray-300 mb-4 md:mb-0">
               Other Recommended Groups
             </h2>
             
-            {/* Filters (Dropdowns) */}
             <div className="flex space-x-3 text-sm">
               {['Sort by: Best Match', 'Course: All', 'Members: Any'].map((placeholder, index) => (
                 <select 
@@ -163,7 +155,6 @@ const App = () => {
             </div>
           </div>
           
-          {/* Recommended Groups Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {recommendedGroups.map((group, index) => (
               <RecommendedGroupCard key={index} data={group} />
@@ -175,4 +166,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default AvailableGroups;

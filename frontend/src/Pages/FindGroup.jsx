@@ -1,6 +1,40 @@
+import React from 'react';
+import { Settings, Bell, Search, BookOpen } from 'lucide-react';
+
 export default function FindGroup() {
   return (
-   <>
+    <>
+      {/* Header */}
+      <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
+        <div className="flex items-center space-x-2">
+          <BookOpen className="text-blue-400 w-6 h-6" />
+          <span className="text-xl font-bold text-white">StudySync</span>
+        </div>
+
+        <nav className="hidden md:flex space-x-6 text-sm">
+          <a href="/dashboard" className="text-gray-400 hover:text-white transition duration-150">Dashboard</a>
+          <a href="/available-groups" className="text-gray-400 hover:text-white transition duration-150">Available Groups</a>
+          <a href="/find-group" className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1">Find Group</a>
+        </nav>
+
+        <div className="flex items-center space-x-4">
+          <button aria-label="Search" className="text-gray-400 hover:text-white transition duration-150 hidden sm:block">
+            <Search className="w-5 h-5" />
+          </button>
+          <button aria-label="Settings" className="text-gray-400 hover:text-white transition duration-150">
+            <Settings className="w-5 h-5" />
+          </button>
+          <button aria-label="Notifications" className="text-gray-400 hover:text-white transition duration-150">
+            <Bell className="w-5 h-5" />
+          </button>
+          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
+  K
+</div>
+
+        </div>
+      </header>
+
+      {/* Inline Styles */}
       <style>{`
         body {
           margin: 0;
@@ -38,7 +72,6 @@ export default function FindGroup() {
           font-weight: 600;
         }
 
-        /* Search Bar */
         .search-bar {
           width: 100%;
           padding: 0.8rem;
@@ -49,7 +82,6 @@ export default function FindGroup() {
           outline: none;
         }
 
-        /* Interest chips */
         .chip-container {
           display: flex;
           flex-wrap: wrap;
@@ -78,7 +110,6 @@ export default function FindGroup() {
           border-color: #475569;
         }
 
-        /* Selector Buttons (Study Style, Skill Level) */
         .select-row {
           display: flex;
           gap: 1rem;
@@ -106,7 +137,6 @@ export default function FindGroup() {
           border-color: #475569;
         }
 
-        /* Availability buttons */
         .availability-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -134,7 +164,6 @@ export default function FindGroup() {
           border-color: #475569;
         }
 
-        /* Final Button */
         .submit-btn {
           width: 100%;
           margin-top: 1rem;
@@ -154,6 +183,7 @@ export default function FindGroup() {
         }
       `}</style>
 
+      {/* Page Content */}
       <div className="find-container">
         <h1 className="page-title">Find Your Perfect Study Group</h1>
         <p className="subtitle">
@@ -179,7 +209,6 @@ export default function FindGroup() {
         {/* Study Style */}
         <div className="card">
           <p className="section-title">What's Your Study Style?</p>
-
           <div className="select-row">
             <div className="select-btn">Quiet</div>
             <div className="select-btn selected">Collaborative</div>
@@ -190,14 +219,11 @@ export default function FindGroup() {
         {/* Availability */}
         <div className="card">
           <p className="section-title">Your Availability</p>
-
           <div className="availability-grid">
             <div className="avail-btn">Weekday Mornings</div>
             <div className="avail-btn selected">Weekday Evenings</div>
-
             <div className="avail-btn selected">Weekend Afternoons</div>
             <div className="avail-btn">Weekend Evenings</div>
-
             <div className="avail-btn">Weekend Mornings</div>
           </div>
         </div>
@@ -205,7 +231,6 @@ export default function FindGroup() {
         {/* Skill Level */}
         <div className="card">
           <p className="section-title">Preferred Skill Level</p>
-
           <div className="select-row">
             <div className="select-btn">Beginner</div>
             <div className="select-btn selected">Intermediate</div>
@@ -213,7 +238,6 @@ export default function FindGroup() {
           </div>
         </div>
 
-        {/* Submit */}
         <button className="submit-btn">Find My Group</button>
       </div>
     </>
