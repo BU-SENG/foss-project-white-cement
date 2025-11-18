@@ -20,24 +20,18 @@ export default function Dashboard() {
       <style>{`
         * { box-sizing: border-box; }
         body, html { margin: 0; padding: 0; height: 100%; }
-        .header {
-          display: flex; 
-          align-items: center; 
-          padding: 1rem 2rem; 
-          background-color: #1e293b; 
-          color: #fff; 
-          font-family: 'Poppins', sans-serif;
-          border-bottom: 1px solid #334155; /* subtle bottom border line */
-        }
-        .header span { margin-left: 0.5rem; font-size: 1.5rem; font-weight: 700; }
         .dashboard { display: flex; height: calc(100vh - 64px); background-color: #0f172a; color: #fff; font-family: 'Poppins', sans-serif; overflow: hidden; }
-        .sidebar { width: 220px; background-color: #1e293b; display: flex; flex-direction: column; justify-content: space-between; padding: 1rem; }
-        .user-info { display: flex; align-items: center; gap: 0.5rem; }
+        .sidebar { width: 220px; background-color: #1e293b; display: flex; flex-direction: column; justify-content: flex-start; padding: 1rem; }
+        .user-info { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; }
         .name { font-weight: 600; }
         .email { font-size: 0.6rem; color: #94a3b8; }
-        .nav-links a, .bottom-links a { display: block; padding: 0.5rem 0; color: #cbd5e1; text-decoration: none; transition: 0.2s; }
-        .nav-links a:hover, .bottom-links a:hover { color: white; }
+        .nav-links { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+        .nav-links a { display: block; padding: 0.5rem 0; color: #cbd5e1; text-decoration: none; transition: 0.2s; }
+        .nav-links a:hover { color: white; }
         .nav-links a.active { background-color: #3b82f6; padding: 0.5rem; border-radius: 6px; color: #fff; }
+        .bottom-links { margin-top: auto; }
+        .logout-btn { width: 100%; background-color: #ef4444; color: white; border: none; padding: 0.6rem 1rem; border-radius: 6px; cursor: pointer; transition: 0.2s; font-weight: 600; }
+        .logout-btn:hover { background-color: #dc2626; }
         .main { flex: 1; padding: 2rem; overflow-y: auto; height: 100%; }
         .breadcrumb { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1rem; }
         .group-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
@@ -52,14 +46,17 @@ export default function Dashboard() {
         .member-name { flex: 1; }
         .tag { font-size: 0.95rem; padding: 0.4rem 0.7rem; border-radius: 9999px; font-weight: 500; }
         .tag.admin { background-color: #fbbf24; color: #1f2937; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 2rem; background-color: #1e293b; color: #fff; border-bottom: 1px solid #334155; }
+        .header span { margin-left: 0.5rem; font-size: 1.5rem; font-weight: 700; }
+        .header .avatar { width: 32px; height: 32px; background-color: #7c3aed; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: white; font-size: 0.875rem; }
       `}</style>
 
-      {/* Top Header */}
+      {/* Header */}
       <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
-              <div className="flex items-center space-x-2">
-                <BookOpen className="text-blue-400 w-6 h-6" />
-                <span className="text-xl font-bold text-white">StudySync</span>
-              </div>
+        <div className="flex items-center">
+          <BookOpen className="text-blue-400 w-6 h-6 mr-2.5" />
+          <span className="text-xl font-bold text-white">StudySync</span>
+        </div>
       </header>
 
       <div className="dashboard">
@@ -73,19 +70,18 @@ export default function Dashboard() {
           </div>
 
           <nav className="nav-links">
-            <Link to="/" className="">🏠 Home</Link>
             <Link to="/dashboard" className="active">👥 My Groups</Link>
             <Link to="/find-group">🔍 Find a Group</Link>
             <Link to="/available-groups">👤 Available Groups</Link>
+            <Link to="/settings">⚙ Settings</Link>
           </nav>
 
           <div className="bottom-links">
-            <Link to="/settings">⚙ Settings</Link>
-            <Link to="/login">🚪 Log Out</Link>
+            <button className="logout-btn" onClick={() => window.location.href='/login'}>Log Out</button>
           </div>
         </aside>
 
-        {/* Main area */}
+        {/* Main Area */}
         <main className="main">
           <div className="breadcrumb">
             My Groups / <span>Free Open Source Software Study Group</span>
@@ -97,7 +93,6 @@ export default function Dashboard() {
               <p>Next Meeting: Wednesdays at 4:00 PM PST</p>
             </div>
 
-            {/* Leave Group button redirects to Available Groups */}
             <Link to="/available-groups">
               <button className="leave-button">Leave Group</button>
             </Link>

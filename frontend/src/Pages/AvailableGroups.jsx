@@ -1,5 +1,6 @@
 import React from 'react';
 import { Settings, Bell, Search, BookOpen } from 'lucide-react';
+import { Link, useLocation } from "react-router-dom";
 
 // Mock Data
 const bestMatchData = {
@@ -18,7 +19,7 @@ const recommendedGroups = [
   { match: 85, title: "Organic Chemistry Crew", description: "Let's conquer O-Chem! We meet weekly for flashcards and reaction mechanism practice.", members: { list: ['O', 'C', 'R'], extra: 0 } },
 ];
 
-// Helper Component: Member Avatars
+// Member Avatars
 const MemberAvatars = ({ members, isLarge = false }) => {
   const sizeClass = isLarge ? 'w-8 h-8 text-sm' : 'w-6 h-6 text-xs';
   const overlapClass = isLarge ? '-ml-2' : '-ml-1';
@@ -45,39 +46,51 @@ const MemberAvatars = ({ members, isLarge = false }) => {
   );
 };
 
-// Header Component
-const Header = () => (
-  <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
-    <div className="flex items-center space-x-2">
-      <BookOpen className="text-blue-400 w-6 h-6" />
-      <span className="text-xl font-bold text-white">StudySync</span>
-    </div>
-    
-    <nav className="hidden md:flex space-x-6 text-sm">
-      <a href="/dashboard" className="text-gray-400 hover:text-white transition duration-150">Dashboard</a>
-      <a href="/find-group" className="text-gray-400 hover:text-white transition duration-150">Find Group</a>
-      <a href="/available-groups" className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1">Available Groups</a>
-    </nav>
-    
-    <div className="flex items-center space-x-4">
-      <button aria-label="Search" className="text-gray-400 hover:text-white transition duration-150 hidden sm:block">
-        <Search className="w-5 h-5" />
-      </button>
-      <button aria-label="Settings" className="text-gray-400 hover:text-white transition duration-150">
-        <Settings className="w-5 h-5" />
-      </button>
-      <button aria-label="Notifications" className="text-gray-400 hover:text-white transition duration-150">
-        <Bell className="w-5 h-5" />
-      </button>
-      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
-  K
-</div>
+// UPDATED Header with Active Link Logic
+const Header = () => {
+  const location = useLocation();
 
-    </div>
-  </header>
-);
+  const isActive = (path) =>
+    location.pathname === path
+      ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
+      : "text-gray-400 hover:text-white transition duration-150";
 
-// Best Match Card Component
+  return (
+    <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
+      
+      <div className="flex items-center space-x-2">
+        <BookOpen className="text-blue-400 w-6 h-6" />
+        <span className="text-xl font-bold text-white">StudySync</span>
+      </div>
+
+      <nav className="hidden md:flex space-x-6 text-sm">
+        <Link to="/dashboard" className={isActive("/dashboard")}>Dashboard</Link>
+        <Link to="/find-group" className={isActive("/find-group")}>Find Group</Link>
+        <Link to="/available-groups" className={isActive("/available-groups")}>Available Groups</Link>
+      </nav>
+
+      <div className="flex items-center space-x-4">
+        <button aria-label="Search" className="text-gray-400 hover:text-white transition duration-150 hidden sm:block">
+          <Search className="w-5 h-5" />
+        </button>
+        <button aria-label="Settings" className="text-gray-400 hover:text-white transition duration-150">
+          <Settings className="w-5 h-5" />
+        </button>
+        <button aria-label="Notifications" className="text-gray-400 hover:text-white transition duration-150">
+          <Bell className="w-5 h-5" />
+        </button>
+
+        {/* Profile Circle */}
+        <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
+          K
+        </div>
+      </div>
+
+    </header>
+  );
+};
+
+// Best Match Card
 const BestMatchCard = ({ data }) => (
   <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 shadow-xl flex flex-col lg:flex-row justify-between items-start lg:items-center">
     
@@ -99,7 +112,7 @@ const BestMatchCard = ({ data }) => (
   </div>
 );
 
-// Recommended Group Card Component
+// Recommended Group Card
 const RecommendedGroupCard = ({ data }) => (
   <div className="bg-gray-800 p-4 rounded-xl border border-gray-700 flex flex-col h-full hover:shadow-2xl transition duration-200">
     <span className="text-blue-400 text-sm font-semibold mb-2">{data.match}% Match</span>
@@ -107,8 +120,8 @@ const RecommendedGroupCard = ({ data }) => (
     <p className="text-gray-400 text-sm flex-grow mb-4">{data.description}</p>
 
     <div className="mt-auto pt-3 border-t border-gray-700">
-        <span className="text-gray-400 text-xs font-medium uppercase block mb-2">Members</span>
-        <MemberAvatars members={data.members} isLarge={false} />
+      <span className="text-gray-400 text-xs font-medium uppercase block mb-2">Members</span>
+      <MemberAvatars members={data.members} isLarge={false} />
     </div>
 
     <button className="mt-4 w-full px-4 py-2 bg-blue-600 text-white text-base font-semibold rounded-lg hover:bg-blue-700 transition duration-200">
@@ -117,7 +130,7 @@ const RecommendedGroupCard = ({ data }) => (
   </div>
 );
 
-// AvailableGroups Page Component
+// MAIN PAGE
 const AvailableGroups = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
@@ -161,6 +174,7 @@ const AvailableGroups = () => {
             ))}
           </div>
         </section>
+
       </main>
     </div>
   );
