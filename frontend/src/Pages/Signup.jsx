@@ -35,7 +35,7 @@ function Signup() {
         <input
           type="text"
           name="fullName"
-          placeholder="Okoye Kennedy"
+          placeholder="John Doe"
           value={form.fullName}
           onChange={handleChange}
           style={styles.input}
@@ -46,7 +46,7 @@ function Signup() {
         <input
           type="email"
           name="email"
-          placeholder="ken1@student.babcock.edu.ng"
+          placeholder="you@example.com"
           value={form.email}
           onChange={handleChange}
           style={styles.input}
@@ -57,7 +57,7 @@ function Signup() {
         <input
           type="text"
           name="major"
-          placeholder="Software Engineering"
+          placeholder="e.g. Software Engineering"
           value={form.major}
           onChange={handleChange}
           style={styles.input}
@@ -97,7 +97,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#0f172a',
     padding: '2rem',
   },
   form: {
