@@ -9,6 +9,7 @@ Description:
 StudySync is a simple system that helps students find compatible study partners and groups based on interests, selected courses, availability, and study style.
 It automatically recommends the best study group for each student.
 
+Figma link: https://www.figma.com/design/e2vwNW2JId20IwlSPIAEcy/amos-project?node-id=0-1&t=BuGWE8d1stvG4y6s-1
 
 Project Overview
 
