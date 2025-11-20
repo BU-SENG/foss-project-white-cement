@@ -1,5 +1,6 @@
+// FindGroup.jsx
 import React, { useState } from "react";
-import { Settings, Bell, Search, BookOpen } from "lucide-react";
+import { Settings, Bell, Search, BookOpen, Menu, X } from "lucide-react";
 
 export default function FindGroup() {
   // Interests (multi-select)
@@ -48,6 +49,9 @@ export default function FindGroup() {
   const skillLevels = ["Beginner", "Intermediate", "Advanced"];
   const [selectedLevel, setSelectedLevel] = useState(null);
 
+  // ✅ mobile nav toggle state (added)
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   // Redirect
   const handleSubmit = () => {
     window.location.href = "/available-groups";
@@ -56,49 +60,103 @@ export default function FindGroup() {
   return (
     <>
       {/* Header */}
-      <header className="flex justify-between items-center px-4 py-3 md:px-8 bg-gray-800 border-b border-gray-700 shadow-lg">
-        <div className="flex items-center space-x-2">
-          <BookOpen className="text-blue-400 w-6 h-6" />
-          <span className="text-xl font-bold text-white">StudySync</span>
-        </div>
+      <header className="bg-gray-800 border-b border-gray-700 shadow-lg">
+        <div className="flex justify-between items-center px-4 py-3 md:px-8">
+          <div className="flex items-center space-x-2">
+            <BookOpen className="text-blue-400 w-6 h-6" />
+            <span className="text-xl font-bold text-white">StudySync</span>
+          </div>
 
-        <nav className="hidden md:flex space-x-6 text-sm">
-          <a href="/dashboard" className="text-gray-400 hover:text-white transition duration-150">
-            Dashboard
-          </a>
+          {/* Desktop nav */}
+          <nav className="hidden md:flex space-x-6 text-sm">
+            <a
+              href="/dashboard"
+              className="text-gray-400 hover:text-white transition duration-150"
+            >
+              Dashboard
+            </a>
 
-          <a
-            href="/find-group"
-            className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
-          >
-            Find Group
-          </a>
+            <a
+              href="/find-group"
+              className="text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
+            >
+              Find Group
+            </a>
 
-          <a
-            href="/available-groups"
-            className="text-gray-400 hover:text-white transition duration-150"
-          >
-            Available Groups
-          </a>
-        </nav>
+            <a
+              href="/available-groups"
+              className="text-gray-400 hover:text-white transition duration-150"
+            >
+              Available Groups
+            </a>
+          </nav>
 
-        <div className="flex items-center space-x-4">
-          <button aria-label="Search" className="text-gray-400 hover:text-white transition duration-150 hidden sm:block">
-            <Search className="w-5 h-5" />
-          </button>
+          <div className="flex items-center space-x-4">
+            <button
+              aria-label="Search"
+              className="text-gray-400 hover:text-white transition duration-150 hidden sm:block"
+            >
+              <Search className="w-5 h-5" />
+            </button>
 
-          <button aria-label="Settings" className="text-gray-400 hover:text-white transition duration-150">
-            <Settings className="w-5 h-5" />
-          </button>
+            <button
+              aria-label="Settings"
+              className="text-gray-400 hover:text-white transition duration-150"
+            >
+              <Settings className="w-5 h-5" />
+            </button>
 
-          <button aria-label="Notifications" className="text-gray-400 hover:text-white transition duration-150">
-            <Bell className="w-5 h-5" />
-          </button>
+            <button
+              aria-label="Notifications"
+              className="text-gray-400 hover:text-white transition duration-150"
+            >
+              <Bell className="w-5 h-5" />
+            </button>
 
-          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
-            K
+            <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-semibold text-base cursor-pointer">
+              K
+            </div>
+
+            {/* ✅ Mobile menu button (added) */}
+            <button
+              className="md:hidden text-gray-200 hover:text-white"
+              aria-label="Toggle menu"
+              onClick={() => setMobileOpen((v) => !v)}
+            >
+              {mobileOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
+
+        {/* ✅ Mobile nav dropdown (added) */}
+        {mobileOpen && (
+          <nav className="md:hidden px-4 pb-3 flex flex-col gap-2 text-sm">
+            <a
+              href="/dashboard"
+              className="text-gray-300 hover:text-white py-2 px-2 rounded-md hover:bg-gray-700"
+            >
+              Dashboard
+            </a>
+
+            <a
+              href="/find-group"
+              className="text-blue-400 font-semibold py-2 px-2 rounded-md bg-gray-700"
+            >
+              Find Group
+            </a>
+
+            <a
+              href="/available-groups"
+              className="text-gray-300 hover:text-white py-2 px-2 rounded-md hover:bg-gray-700"
+            >
+              Available Groups
+            </a>
+          </nav>
+        )}
       </header>
 
       {/* INLINE STYLES (unchanged) */}
@@ -231,7 +289,11 @@ export default function FindGroup() {
         {/* INTERESTS */}
         <div className="card">
           <p className="section-title">Select Your Interests</p>
-          <input type="text" className="search-bar" placeholder="Search for interests like 'AI' or 'Math'" />
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search for interests like 'AI' or 'Math'"
+          />
 
           <div className="chip-container">
             {chipOptions.map((chip) => (
