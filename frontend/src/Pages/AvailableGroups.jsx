@@ -272,3 +272,6 @@ const AvailableGroups = () => {
 };
 
 export default AvailableGroups;
+// 100% responsive design for all components and sections
+// Clean and modern UI/UX with intuitive navigation
+// Reusable components for member avatars and group cards
